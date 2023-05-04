@@ -67,6 +67,6 @@ function renderizarMapa(y,x){
         textTela.innerHTML += "<br>"
     }
     if(coordPlayer[0] == 14 && coordPlayer[1] == 13){
-        window.location.href = "../final/index.html"
+        window.location.href = "../FINAL/index.html"
     }
 }
