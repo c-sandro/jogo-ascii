@@ -5,7 +5,7 @@ var mapa = [["*", "*", "*", "*", "*", "*", "*", "*", "*", "*"],
             ["*", " ", " ", " ", " ", " ", " ", "*", " ", "*"], 
             ["*", " ", "k", " ", " ", " ", " ", "H", " ", "*"], 
             ["*", " ", "O", " ", " ", " ", " ", "#", " ", "*"], 
-            ["*", " ", " ", " ", " ", " ", " ", " ", " ", "*"], 
+            ["*", " ", " ", " ", " ", "□", " ", " ", " ", "*"], 
             ["*", " ", " ", " ", " ", " ", "M", " ", " ", "*"], 
             ["*", "*", "*", "*", "*", "*", "*", "*", "*", "*"]] 
 var coordPlayer = [4,2], coordMonstro = [4,6]
@@ -13,7 +13,7 @@ var xouy = ""
 var textTela = document.getElementById("textTela")
 var tamX = 10, tamY = 10
 var vidas = 3
-var monstro = false, monstroMorto = false
+var monstro = false, monstroMorto = false, tomaDano = false
 renderizarMapa(tamY, tamX)
 
 window.onkeydown = function andar(tecla){
@@ -49,13 +49,11 @@ window.onkeydown = function andar(tecla){
             mapa[coordPlayer[0]][coordPlayer[1]] = " "
         }
     }else if(tecla.key == "m"){
-        if(monstro == false){
-            monstro = true
-        }else{
-            monstro = false
-        }
+        monstro = !monstro
     }else if(tecla.key == "v"){
         vidas += 3
+    }else if(tecla.key == "b"){
+        tomaDano = !tomaDano
     }
     if(mapa[coordPlayer[0]][coordPlayer[1]] == "O"){
         for(var i = 0; i < tamY; i++){
@@ -76,7 +74,9 @@ window.onkeydown = function andar(tecla){
     }
     if(tecla.key == "w" || tecla.key == "a" || tecla.key == "s" || tecla.key == "d" || tecla.key == "e"){
         moverMonstro()
-        console.log("w")
+        if((mapa[coordPlayer[0]][coordPlayer[1]] == "M" || mapa[coordPlayer[0]][coordPlayer[1]] == "W") && tomaDano == true){
+            vidas-- 
+        }
     }
     renderizarMapa(tamY,tamX)
 }
@@ -145,7 +145,6 @@ function renderizarMapa(y,x){
         } 
         textTela.innerHTML += "<br>"
     }
-    textTela.innerText = textTela.innerText.replace("&","E")
     for(var i = 0; i < vidas; i++){
         textTela.innerText += "     "
     }
