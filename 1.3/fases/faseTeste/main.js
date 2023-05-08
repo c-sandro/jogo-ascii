@@ -90,6 +90,24 @@ window.onkeydown = function andar(tecla){
     if(coordPlayer[0] == coordBloco[0] && coordPlayer[1] == coordBloco[1]){
         moverBloco(tecla.key)
     }
+    //ativar o botao de novo
+    if(mapa[coordPlayer[0]][coordPlayer[1]] == "O" || mapa[coordMonstro[0]][coordMonstro[1]] == "O" || mapa[coordBloco[0]][coordBloco[1]] == "O"){
+        for(var i = 0; i < tamY; i++){
+            for(var j = 0; j < tamX; j++){
+                if(mapa[i][j] == "#"){
+                    mapa[i][j] = "W"
+                }
+            }
+        }
+    }else{
+        for(var i = 0; i < tamY; i++){
+            for(var j = 0; j < tamX; j++){
+                if(mapa[i][j] == "W"){
+                    mapa[i][j] = "#"
+                }
+            }
+        }
+    }
     //se o bloco estiver em espinhos, quebra
     if(mapa[coordBloco[0]][coordBloco[1]] == "M"){
         mapa[coordBloco[0]][coordBloco[1]] = " "
