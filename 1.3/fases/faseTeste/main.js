@@ -1,4 +1,4 @@
-var mapa = [["*", "*", "*", "*", "*", "*", "*", "*", "*", "*"], 
+const mapa = [["*", "*", "*", "*", "*", "*", "*", "*", "*", "*"], 
             ["*", " ", " ", " ", " ", " ", " ", " ", " ", "*"], 
             ["*", " ", " ", " ", " ", " ", " ", " ", " ", "*"], 
             ["*", " ", " ", " ", " ", " ", " ", " ", " ", "*"], 
@@ -11,8 +11,8 @@ var mapa = [["*", "*", "*", "*", "*", "*", "*", "*", "*", "*"],
             [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "]] 
 var coordPlayer = [4,2], coordMonstro = [4,6], coordBloco = [7,5]
 var xouy = ""
-var textTela = document.getElementById("textTela")
-var tamX = 10, tamY = 10
+const textTela = document.getElementById("textTela")
+const tamX = 10, tamY = 10
 var vidas = 3
 var monstro = false, monstroMorto = false, tomaDano = false
 renderizarMapa(tamY, tamX)
