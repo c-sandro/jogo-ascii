@@ -5,10 +5,10 @@ var mapa = [["*", "*", "*", "*", "*", "*", "*", "*", "*", "*"],
             ["*", " ", " ", " ", " ", " ", " ", "*", " ", "*"], 
             ["*", " ", "k", " ", " ", " ", " ", "H", " ", "*"], 
             ["*", " ", "O", " ", " ", " ", " ", "#", " ", "*"], 
-            ["*", " ", " ", " ", " ", "□", " ", " ", " ", "*"], 
+            ["*", " ", " ", " ", " ", " ", " ", " ", " ", "*"], 
             ["*", " ", " ", " ", " ", " ", "M", " ", " ", "*"], 
             ["*", "*", "*", "*", "*", "*", "*", "*", "*", "*"]] 
-var coordPlayer = [4,2], coordMonstro = [4,6]
+var coordPlayer = [4,2], coordMonstro = [4,6], coordBloco = [7,5]
 var xouy = ""
 var textTela = document.getElementById("textTela")
 var tamX = 10, tamY = 10
@@ -35,7 +35,7 @@ window.onkeydown = function andar(tecla){
     }else if(tecla.key == "d"){
         if(mapa[coordPlayer[0]][coordPlayer[1] + 1] != "*" && mapa[coordPlayer[0]][coordPlayer[1] + 1] != "H"){
             coordPlayer[1]++
-            xouy = "x"    
+            xouy = "x"
         }  
     }else if(tecla.key == "e"){
         if(mapa[coordPlayer[0]][coordPlayer[1]] == "k"){
@@ -52,10 +52,21 @@ window.onkeydown = function andar(tecla){
         monstro = !monstro
     }else if(tecla.key == "v"){
         vidas += 3
-    }else if(tecla.key == "b"){
+    }else if(tecla.key == "n"){
         tomaDano = !tomaDano
+    }else if(tecla.key == "b"){
+        coordBloco = [7,5]
     }
-    if(mapa[coordPlayer[0]][coordPlayer[1]] == "O"){
+    if(tecla.key == "w" || tecla.key == "a" || tecla.key == "s" || tecla.key == "d" || tecla.key == "e"){
+        moverMonstro()
+        if((mapa[coordPlayer[0]][coordPlayer[1]] == "M" || mapa[coordPlayer[0]][coordPlayer[1]] == "W") && tomaDano == true){
+            vidas-- 
+        }
+        if(coordPlayer[0] == coordBloco[0] && coordPlayer[1] == coordBloco[1]){
+            moverBloco(tecla.key)
+        }
+    }
+    if(mapa[coordPlayer[0]][coordPlayer[1]] == "O" || mapa[coordMonstro[0]][coordMonstro[1]] == "O" || mapa[coordBloco[0]][coordBloco[1]] == "O"){
         for(var i = 0; i < tamY; i++){
             for(var j = 0; j < tamX; j++){
                 if(mapa[i][j] == "#"){
@@ -70,12 +81,6 @@ window.onkeydown = function andar(tecla){
                     mapa[i][j] = "#"
                 }
             }
-        }
-    }
-    if(tecla.key == "w" || tecla.key == "a" || tecla.key == "s" || tecla.key == "d" || tecla.key == "e"){
-        moverMonstro()
-        if((mapa[coordPlayer[0]][coordPlayer[1]] == "M" || mapa[coordPlayer[0]][coordPlayer[1]] == "W") && tomaDano == true){
-            vidas-- 
         }
     }
     renderizarMapa(tamY,tamX)
@@ -122,9 +127,36 @@ if(monstro == true && monstroMorto == false){
     if(mapa[coordMonstro[0]][coordMonstro[1]] == "W"){
         coordMonstro = [-1,-1]
         monstroMorto = true
-        console.log("w")
     }
 }
+}
+
+function moverBloco(direcao){
+    if(direcao == "w"){
+        if(mapa[coordBloco[0] - 1][coordBloco[1]] != "*" && mapa[coordBloco[0] - 1][coordBloco[1]] != "H"){
+            coordBloco[0]--
+        }else{
+            coordPlayer[0]++
+        }
+    }else if(direcao == "a"){
+        if(mapa[coordBloco[0]][coordBloco[1] - 1] != "*" && mapa[coordBloco[0]][coordBloco[1] - 1] != "H"){
+            coordBloco[1]--
+        }else{
+            coordPlayer[1]++
+        }
+    }else if(direcao == "s"){
+        if(mapa[coordBloco[0] + 1][coordBloco[1]] != "*" && mapa[coordBloco[0] + 1][coordBloco[1]] != "H"){
+            coordBloco[0]++
+        }else{
+            coordPlayer[0]--
+        }
+    }else if(direcao == "d"){
+        if(mapa[coordBloco[0] - 1][coordBloco[1] + 1] != "*" && mapa[coordBloco[0]][coordBloco[1] + 1] != "H"){
+            coordBloco[1]++
+        }else{
+            coordPlayer[1]--
+        }
+    }
 }
 
 function renderizarMapa(y,x){
@@ -135,6 +167,8 @@ function renderizarMapa(y,x){
                 textTela.innerText += " &"
             }else if(coordMonstro[0] == i && coordMonstro[1] == j){
                 textTela.innerText += " §"
+            }else if(coordBloco[0] == i && coordBloco[1] == j){
+                textTela.innerText += " □"
             }else{
                 if(mapa[i][j] == "W"){
                     textTela.innerText += " M"
