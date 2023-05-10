@@ -10,7 +10,8 @@ window.onkeydown = function menu(tecla){
         if(confirmar == false){
            window.location.href = "../tutorial/t1/index.html" 
         }else{
-            document.getElementById("botoes").innerText = `*          /===========\\                              * 
+            document.getElementById("botoes").innerText = `*                                                     * 
+*          /===========\\                              * 
 *          | 1 - jogar |                              * 
 *          \\===========/                              * 
 *                                                     * 
@@ -23,6 +24,7 @@ window.onkeydown = function menu(tecla){
 *          \\==========/                               * 
 *                                                     * 
 * * * * * * * * * * * * * * * * * * * * * * * * * * * * `
+            confirmar = false
         }
         
     }else if(tecla.key == "3"){
@@ -32,6 +34,7 @@ window.onkeydown = function menu(tecla){
 *          /=========\\  /=========\\                   * 
 *          | 1 - Sim |  | 2 - Não |                   * 
 *          \\=========/  \\=========/                   * 
+*                                                     * 
 *                                                     * 
 *                                                     * 
 *                                                     * 
