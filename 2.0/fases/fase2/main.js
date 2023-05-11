@@ -191,10 +191,13 @@ function tomarDano(){
     coordPlayer = [1,1]
     coordBloco = [4,9,0]
     coordMonstro = [27,28]
+    qntChaves = 0
     for(var i = 0; i < tamY; i++){
         for(var j = 0; j < tamX; j++){
             if(mapa[i][j] == "v"){
                 mapa[i][j] = "M"
+            }else if(mapa[i][j] == "U" && i != 0){
+                mapa[i][j] = "H"
             }
         }
     }

@@ -57,7 +57,7 @@ function renderizarMapa(y,x){
         for(var j = 0; j < x; j++){
             if(coordPlayer[0] == i && coordPlayer[1] == j){
                 textTela.innerText += " &"
-            }else if(Math.pow((i - coordPlayer[0]), 2) + Math.pow((j - coordPlayer[1]), 2) <= 10 || mapa[i][j] == "k"){
+            }else if(Math.pow((i - coordPlayer[0]), 2) + Math.pow((j - coordPlayer[1]), 2) <= 10){
                 textTela.innerText += " " + mapa[i][j]
             }else{
                 textTela.innerText += "  "
