@@ -23,16 +23,16 @@ var mapa = [["*", "U", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*
             ["*", "M", "M", "*", " ", " ", "*", "*", "*", "*", "*", "*", "*", " ", " ", "*", "#", "#", "#", " ", " ", " ", " ", " ", " ", " ", "#", "#", "#", "*"],
             ["*", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "*", "*", "*", "*", " ", " ", " ", " ", " ", " ", " ", "#", "#", "#", "*"],
             ["*", "*", " ", " ", " ", " ", "*", "M", "M", "M", "*", "*", "*", "*", "*", "*", " ", " ", " ", " ", " ", "*", " ", " ", " ", " ", "#", "#", "#", "*"],
-            ["*", " ", " ", "M", "M", "M", "M", "M", "M", " ", " ", "*", "*", "*", "*", "*", " ", " ", " ", " ", " ", "*", " ", " ", " ", "*", "*", "*", "*", "*"],
-            ["*", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "H", " ", " ", " ", " ", " ", " ", " ", " ", " ", "H", " ", " ", " ", "*"],
-            ["*", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "*", " ", " ", " ", " ", " ", "M", " ", " ", " ", "*", " ", " ", " ", "*"],
-            ["*", "M", "M", "M", "M", "M", "M", "M", "M", "M", "k", "M", "M", "M", "M", "*", " ", " ", " ", " ", " ", "*", " ", " ", " ", "*", " ", " ", " ", "*"],
+            ["*", " ", " ", "M", "M", "M", "M", "M", "M", "M", "M", "*", "*", " ", " ", "*", " ", " ", " ", " ", " ", "*", " ", " ", " ", " ", " ", "*", "*", "*"],
+            ["*", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "H", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "H", " ", "*"],
+            ["*", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "*", " ", " ", " ", " ", " ", "M", " ", " ", " ", " ", " ", "*", " ", "*"],
+            ["*", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "M", "k", "*", " ", " ", " ", " ", " ", "*", " ", " ", " ", " ", " ", "*", " ", "*"],
             ["*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*"],
             ["*", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "*"]]  
-var coordPlayer = [1,1], coordBloco = [4,9,0], coordMonstro = [27,27]
+var coordPlayer = [1,1], coordBloco = [4,9,0], coordMonstro = [27,28]
 const textTela = document.getElementById("textTela")
 const tamX = 30, tamY = 30
-var vidas = 3
+var vidas = 3, qntChaves = 0
 var monstroMorto = false
 renderizarMapa(tamY, tamX)
 
@@ -59,15 +59,18 @@ window.onkeydown = function andar(tecla){
         }  
     }else if(tecla.key == "e"){
         if(mapa[coordPlayer[0]][coordPlayer[1]] == "k"){
-            for(var i = 0; i < tamY; i++){
-                for(var j = 0; j < tamX; j++){
-                    if(mapa[i][j] == "H"){
-                        mapa[i][j] = "U"
-                    }
-                }
+            if(qntChaves == 0){
+                mapa[26][15] = "U"
+                mapa[26][27] = "U"
+                qntChaves++
+            }else{
+                mapa[2][29] = "U"
             }
             mapa[coordPlayer[0]][coordPlayer[1]] = " "
         }
+    }
+    if(coordPlayer[0] == 2 && coordPlayer[1] == 29){
+        window.location.href = "../../menu/index.html"
     }
     if(mapa[coordPlayer[0]][coordPlayer[1]] == "O" || mapa[coordMonstro[0]][coordMonstro[1]] == "O" || mapa[coordBloco[0]][coordBloco[1]] == "O"){
         for(var i = 0; i < tamY; i++){
@@ -89,32 +92,19 @@ window.onkeydown = function andar(tecla){
     if(tecla.key == "w" || tecla.key == "a" || tecla.key == "s" || tecla.key == "d" || tecla.key == "e"){
         moverMonstro()
         if(mapa[coordPlayer[0]][coordPlayer[1]] == "M" || mapa[coordPlayer[0]][coordPlayer[1]] == "W"){
-            vidas-- 
-            coordPlayer = [1,1]
+            tomarDano()
         }
     }
     if(coordPlayer[0] == coordBloco[0] && coordPlayer[1] == coordBloco[1]){
         moverBloco(tecla.key)
-    }
-    if((mapa[coordPlayer[0]][coordPlayer[1]] == "O" || mapa[coordMonstro[0]][coordMonstro[1]] == "O" || mapa[coordBloco[0]][coordBloco[1]] == "O") && mapa.includes("#") == true){
-        mapa = mapa.replaceAll("#","W")
-    }else{
-        if(mapa.includes("W") == true){
-            mapa = mapa.replaceAll("W", "#")
+        if(mapa[coordBloco[0]][coordBloco[1]] == "M"){
+            mapa[coordBloco[0]][coordBloco[1]] = "v"
+            if(coordBloco[2] == 0){
+                coordBloco = [21,9,1]
+            }else{
+                coordBloco = [30,0,2]
+            }
         }
-    }
-    if(mapa[coordBloco[0]][coordBloco[1]] == "M"){
-        if(coordBloco[2] == 0){
-            coordBloco = [21,5,1]
-        }else{
-            coordBloco = [50,0,2]
-        }
-        console.log("w")
-        mapa[coordBloco[0]][coordBloco[1]] = " "
-    }
-    if(mapa[coordMonstro[0]][coordMonstro[1]] == "W" || mapa[coordMonstro[0]][coordMonstro[1]] == "M"){
-        coordMonstro = [10, 0]
-        monstroMorto = true
     }
 
     renderizarMapa(tamY,tamX)
@@ -154,14 +144,14 @@ function moverMonstro(){
         if((xouy == "y" || coordPlayer[0] == coordMonstro[0]) && coordPlayer[1] != coordMonstro[1]){
             if(coordPlayer[1] > coordMonstro[1]){
                 if(coordMonstro[0] == coordPlayer[0] && coordMonstro[1] + 1 == coordPlayer[1]){
-                    vidas--
+                    tomarDano()
                 }
                 else if(mapa[coordMonstro[0]][coordMonstro[1] + 1] != "*" && mapa[coordMonstro[0]][coordMonstro[1] + 1] != "H"){
                     coordMonstro[1]++ 
                 }
             }else if(coordPlayer[1] < coordMonstro[1]){
                 if(coordMonstro[0] == coordPlayer[0] && coordMonstro[1] - 1 == coordPlayer[1]){
-                    vidas--
+                    tomarDano()
                 }
                 else if(mapa[coordMonstro[0]][coordMonstro[1] - 1] != "*" && mapa[coordMonstro[0]][coordMonstro[1] - 1] != "H"){
                     coordMonstro[1]--
@@ -171,14 +161,14 @@ function moverMonstro(){
         }else if(xouy == "x" || coordPlayer[1] == coordMonstro[1]){
             if(coordPlayer[0] > coordMonstro[0]){
                 if(coordMonstro[0] + 1 == coordPlayer[0] && coordMonstro[1] == coordPlayer[1]){
-                    vidas--
+                    tomarDano()
                 }
                 else if(mapa[coordMonstro[0] + 1][coordMonstro[1]] != "*" && mapa[coordMonstro[0] + 1][coordMonstro[1]] != "H"){
                     coordMonstro[0]++  
                 }
             }else if(coordPlayer[0] < coordMonstro[0]){
                 if(coordMonstro[0] - 1 == coordPlayer[0] && coordMonstro[1] == coordPlayer[1]){
-                    vidas--
+                    tomarDano()
                 }
                 else if(mapa[coordMonstro[0] - 1][coordMonstro[1]] != "*" && mapa[coordMonstro[0] - 1][coordMonstro[1]] != "H"){
                     coordMonstro[0]--
@@ -186,10 +176,32 @@ function moverMonstro(){
             }
         }
         if(coordMonstro[0] == coordPlayer[0] && coordMonstro[1] == coordPlayer[1]){
-            vidas--
+            tomarDano()
+        }
+        if(mapa[coordMonstro[0]][coordMonstro[1]] == "W" || mapa[coordMonstro[0]][coordMonstro[1]] == "M"){
+            coordMonstro = [30, 1]
+            monstroMorto = true
+            mapa[coordPlayer[0] + 1][coordPlayer[1]] = "k"
         }
     }
+}
+
+function tomarDano(){
+    vidas-- 
+    coordPlayer = [1,1]
+    coordBloco = [4,9,0]
+    coordMonstro = [27,28]
+    for(var i = 0; i < tamY; i++){
+        for(var j = 0; j < tamX; j++){
+            if(mapa[i][j] == "v"){
+                mapa[i][j] = "M"
+            }
+        }
     }
+    if(vidas <= 0){
+        window.location.href = "../../menu/index.html"
+    }
+}
 
 function renderizarMapa(y,x){
     textTela.innerText = ""
@@ -203,6 +215,10 @@ function renderizarMapa(y,x){
                         textTela.innerText += " □"
                     }else if(coordMonstro[0] == i && coordMonstro[1] == j){
                         textTela.innerText += " §"
+                    }else if(mapa[i][j] == "W"){
+                        textTela.innerText += " W"
+                    }else if(mapa[i][j] == "v"){
+                        textTela.innerText += "  "
                     }else{
                         textTela.innerText += " " + mapa[i][j]
                     }
