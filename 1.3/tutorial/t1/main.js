@@ -1,15 +1,13 @@
-var mapa = [["*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*"],
-            ["*", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "*"],
-            ["*", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "*"],
-            ["*", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "*"],
-            ["*", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "U"],
-            ["*", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "*"],
-            ["*", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "*"],
-            ["*", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "*"],
-            ["*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*"]]
-var coordPlayer = [4,2]
-var textTela = document.getElementById("textTela")  
-var tamY = 9, tamX = 15
+const mapa = [["*", "*", "*", "*", "*", "*", "*", " ", "*", "*", "*", "*", "*", "*", "*"],
+              ["*", " ", " ", " ", " ", " ", "*", " ", "*", " ", " ", " ", " ", " ", "*"],
+              ["*", " ", " ", " ", "*", " ", "*", "*", "*", " ", "*", "*", "*", " ", "*"],
+              ["*", " ", " ", " ", "*", " ", " ", " ", "*", " ", " ", " ", "*", " ", "U"],
+              ["*", "*", "*", "*", "*", "*", "*", " ", "*", "*", "*", " ", "*", "*", "*"],
+              [" ", " ", " ", " ", " ", " ", "*", " ", " ", " ", " ", " ", "*", " ", " "],
+              [" ", " ", " ", " ", " ", " ", "*", "*", "*", "*", "*", "*", "*", " ", " "]]
+var coordPlayer = [2,2]
+const textTela = document.getElementById("textTela")  
+const tamY = 7, tamX = 15
 renderizarMapa(tamY, tamX)
 
 window.onkeydown = function andar(tecla){
@@ -25,13 +23,12 @@ window.onkeydown = function andar(tecla){
         if(mapa[coordPlayer[0] + 1][coordPlayer[1]] != "*" && mapa[coordPlayer[0] + 1][coordPlayer[1]] != "H"){
             coordPlayer[0]++
         }
-
     }else if(tecla.key == "d"){
         if(mapa[coordPlayer[0]][coordPlayer[1] + 1] != "*" && mapa[coordPlayer[0]][coordPlayer[1] + 1] != "H"){
             coordPlayer[1]++        
         }
     }
-    if(coordPlayer[0] == 4 && coordPlayer[1] == 14){
+    if(coordPlayer[0] == 3 && coordPlayer[1] == 14){
         window.location.href = "../t2/index.html"
     }
     renderizarMapa(tamY,tamX)

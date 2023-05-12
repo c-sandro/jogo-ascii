@@ -1,5 +1,5 @@
 var mapa = [["*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*"], 
-            ["*", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "U"], 
+            ["*", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "U", "*"], 
             ["*", "*", " ", "*", "*", " ", "*", "*", "*", " ", "*", " ", "*", " ", "*"], 
             ["*", "*", " ", "*", "*", " ", "*", " ", "*", " ", "*", " ", "*", " ", "*"], 
             ["*", " ", " ", "*", "*", " ", " ", " ", "*", " ", "*", " ", "*", " ", "*"], 
@@ -14,8 +14,8 @@ var mapa = [["*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*
             ["*", " ", " ", " ", " ", " ", "*", " ", " ", "*", " ", "*", "*", " ", "*"], 
             ["*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "H", "*"]]  
 var coordPlayer = [1,13]
-var textTela = document.getElementById("textTela")
-var tamX = 15, tamY = 15
+const textTela = document.getElementById("textTela")
+const tamX = 15, tamY = 15
 renderizarMapa(tamY, tamX)
 
 window.onkeydown = function andar(tecla){
@@ -66,6 +66,6 @@ function renderizarMapa(y,x){
         textTela.innerHTML += "<br>"
     }
     if(coordPlayer[0] == 14 && coordPlayer[1] == 13){
-        window.location.href = "../../final/index.html"
+        window.location.href = "../fase2/index.html"
     }
 }
