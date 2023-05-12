@@ -38,13 +38,7 @@ window.onkeydown = function andar(tecla){
         }
     }else if(tecla.key == "e"){
         if(mapa[coordPlayer[0]][coordPlayer[1]] == "k"){
-            for(var i = 0; i < tamY; i++){
-                for(var j = 0; j < tamX; j++){
-                    if(mapa[i][j] == "H"){
-                        mapa[i][j] = "U"
-                    }
-                }
-            }
+            mapa[14][13] = "U"
             mapa[coordPlayer[0]][coordPlayer[1]] = " "
         }
     }
@@ -56,11 +50,19 @@ function renderizarMapa(y,x){
     for(var i = 0; i < y; i++){
         for(var j = 0; j < x; j++){
             if(coordPlayer[0] == i && coordPlayer[1] == j){
-                textTela.innerText += " &"
+                textTela.innerHTML += "<span style='color: #311dad'> &</span>"
             }else if(Math.pow((i - coordPlayer[0]), 2) + Math.pow((j - coordPlayer[1]), 2) <= 10){
-                textTela.innerText += " " + mapa[i][j]
+                if(mapa[i][j] == "k") {
+                    textTela.innerHTML += "<span style='color: #ede85a'> k</span>"
+                }else if(mapa[i][j] == "H"){
+                    textTela.innerHTML += "<span style='color: #946506'> H</span>"
+                }else if(mapa[i][j] == "U"){
+                    textTela.innerHTML += "<span style='color: #946506'> U</span>"
+                }else{
+                    textTela.innerHTML += " " + mapa[i][j]
+                }
             }else{
-                textTela.innerText += "  "
+                textTela.innerHTML += "  "
             }
         } 
         textTela.innerHTML += "<br>"

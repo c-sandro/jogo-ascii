@@ -181,7 +181,7 @@ function moverMonstro(){
         if(mapa[coordMonstro[0]][coordMonstro[1]] == "W" || mapa[coordMonstro[0]][coordMonstro[1]] == "M"){
             coordMonstro = [30, 1]
             monstroMorto = true
-            mapa[coordPlayer[0] + 1][coordPlayer[1]] = "k"
+            mapa[22][22] = "k"
         }
     }
 }
@@ -192,6 +192,7 @@ function tomarDano(){
     coordBloco = [4,9,0]
     coordMonstro = [27,28]
     qntChaves = 0
+    mapa[28][14] = "k"
     for(var i = 0; i < tamY; i++){
         for(var j = 0; j < tamX; j++){
             if(mapa[i][j] == "v"){
@@ -212,42 +213,50 @@ function renderizarMapa(y,x){
         if(Math.abs(i - coordPlayer[0]) <= 5){
             for(var j = 0; j < x; j++){
                 if(coordPlayer[0] == i && coordPlayer[1] == j){
-                    textTela.innerText += " &"
+                    textTela.innerHTML += "<span style='color: blue'> &</span>"
                 }else if(Math.pow((i - coordPlayer[0]), 2) + Math.pow((j - coordPlayer[1]), 2) <= 35){
                     if(coordBloco[0] == i && coordBloco[1] == j){
-                        textTela.innerText += " □"
+                        textTela.innerHTML += "<span style='color: #b87333'> □</span>"
+                    }else if(mapa[i][j] == "k"){
+                        textTela.innerHTML += "<span style='color: #ede85a'> k</span>"
                     }else if(coordMonstro[0] == i && coordMonstro[1] == j){
-                        textTela.innerText += " §"
+                        textTela.innerHTML += "<span style='color: #820903'> §</span>"
+                    }else if (mapa[i][j] == "#"){
+                        textTela.innerHTML += "<span style='color:  #5e5e5c'> #</span>"
+                    }else if (mapa[i][j] == "M") {
+                        textTela.innerHTML += "<span style='color: #5e5e5c'> M</span>"
                     }else if(mapa[i][j] == "W"){
-                        textTela.innerText += " W"
+                        textTela.innerHTML += "<span style='color: #5e5e5c'> M</span>"
                     }else if(mapa[i][j] == "v"){
-                        textTela.innerText += "  "
+                        textTela.innerHTML += "  "
+                    }else if (mapa[i][j] == "H"){
+                        textTela.innerHTML += "<span style='color: #946506'> H</span>"
+                    }else if (mapa[i][j] == "U"){
+                        textTela.innerHTML += "<span style='color: #946506'> U</span>"
+                    }else if (mapa[i][j] == "O"){
+                        textTela.innerHTML += "<span style='color: #00ba10'> O</span>"
                     }else{
-                        textTela.innerText += " " + mapa[i][j]
+                        textTela.innerHTML += " " + mapa[i][j]
                     }
                 }else{
-                    textTela.innerText += "  "
+                    textTela.innerHTML += "  "
                 }
             }
-            textTela.innerText += " "
-            textTela.innerHTML += "<br>"
-        }else{
-            textTela.innerHTML += "<br>"
-        }   
+        }
+        textTela.innerHTML += "<br>"
     }
-    textTela.innerText = textTela.innerText.replaceAll(",", " ")
     if(coordPlayer[0] == 1 && coordPlayer[1] == 29){
         window.location.href = "../../final/index.html"
     }
     for(var i = 0; i < vidas; i++){
-        textTela.innerText += "     "
+        textTela.innerHTML += "     "
     }
     textTela.innerHTML += "<br>"
     for(var i = 0; i < vidas; i++){
-        textTela.innerText += "(`´) "
+        textTela.innerHTML += "(`´) "
     }
     textTela.innerHTML += "<br>"
     for(var i = 0; i < vidas; i++){
-        textTela.innerText += " \\/  "
+        textTela.innerHTML += " \\/  "
     }
 }

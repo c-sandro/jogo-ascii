@@ -30,18 +30,12 @@ window.onkeydown = function andar(tecla){
         if(mapa[coordPlayer[0]][coordPlayer[1] + 1] != "*" && mapa[coordPlayer[0]][coordPlayer[1] + 1] != "H"){
             coordPlayer[1]++        
         }
-    }else if (tecla.key == "3"){
-        if(fim == true){
-            window.location.href = "../../menu/index.html"            
-        }
     }
     if(mapa[coordPlayer[0]][coordPlayer[1]] == "M"){
         coordPlayer = [6,2]
     }
     if(coordPlayer[0] == 4 && coordPlayer[1] == 14) {
-        document.getElementById("instrucao").innerHTML = "Você completou o Tutorial, parabéns!. <br>"
-        document.getElementById("instrucao").innerText += "Aperte 3 para voltar ao menu"
-        fim = true
+        window.location.href = "../t4/index.html"
     }
     renderizarMapa(tamY, tamX)
 }
@@ -50,12 +44,16 @@ function renderizarMapa(y, x){
     textTela.innerText = ""
     for (var i = 0; i < y; i++) {
         for (var j = 0; j < x; j++) {
-            if (coordPlayer[0] == i && coordPlayer[1] == j) {
-                textTela.innerText += " &"
+            if(coordPlayer[0] == i && coordPlayer[1] == j){
+                textTela.innerHTML += "<span style='color: #311dad'> &</span>"
+            }else if(mapa[i][j] == "U"){
+                textTela.innerHTML += "<span style='color: #946506'> U</span>"
+            }else if(mapa[i][j] == "M"){
+                textTela.innerHTML += "<span style='color: #5e5e5c'> M</span>"
             }else{
-                textTela.innerText += " " + mapa[i][j]
+              textTela.innerHTML += " " + mapa[i][j]
             }
         }
         textTela.innerHTML += "<br>"
-        }
+    }
 }

@@ -52,9 +52,15 @@ function renderizarMapa(y, x) {
     for(var i = 0; i < y; i++){
         for(var j = 0; j < x; j++){
             if(coordPlayer[0] == i && coordPlayer[1] == j){
-                textTela.innerText += " &"
+                textTela.innerHTML += "<span style='color:  #311dad'> &</span>"
+            }else if(mapa[i][j] == "k"){
+                textTela.innerHTML += "<span style='color:  #ede85a'> k</span>"
+            }else if(mapa[i][j] == "H"){
+                textTela.innerHTML += "<span style='color:  #946506'> H</span>"
+            }else if(mapa[i][j] == "U"){
+                textTela.innerHTML += "<span style='color:  #946506'> U</span>"
             }else{
-                textTela.innerText += " " + mapa[i][j]
+                textTela.innerHTML += " " + mapa[i][j]
             }
         }
         textTela.innerHTML += "<br>"
