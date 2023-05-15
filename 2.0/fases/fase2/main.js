@@ -72,6 +72,31 @@ window.onkeydown = function andar(tecla){
     if(coordPlayer[0] == 2 && coordPlayer[1] == 29){
         window.location.href = "../../menu/index.html"
     }
+    botaoEspinhos()
+    if(tecla.key == "w" || tecla.key == "a" || tecla.key == "s" || tecla.key == "d" || tecla.key == "e"){
+        moverMonstro()
+    }
+    botaoEspinhos()
+    if(mapa[coordPlayer[0]][coordPlayer[1]] == "M" || mapa[coordPlayer[0]][coordPlayer[1]] == "W"){
+        tomarDano()
+        console.log("w")
+    }
+    if(coordPlayer[0] == coordBloco[0] && coordPlayer[1] == coordBloco[1]){
+        moverBloco(tecla.key)
+        if(mapa[coordBloco[0]][coordBloco[1]] == "M"){
+            mapa[coordBloco[0]][coordBloco[1]] = "v"
+            if(coordBloco[2] == 0){
+                coordBloco = [21,9,1]
+            }else{
+                coordBloco = [30,0,2]
+            }
+        }
+    }
+
+    renderizarMapa(tamY,tamX)
+}
+
+function botaoEspinhos(){
     if(mapa[coordPlayer[0]][coordPlayer[1]] == "O" || mapa[coordMonstro[0]][coordMonstro[1]] == "O" || mapa[coordBloco[0]][coordBloco[1]] == "O"){
         for(var i = 0; i < tamY; i++){
             for(var j = 0; j < tamX; j++){
@@ -89,25 +114,6 @@ window.onkeydown = function andar(tecla){
             }
         }
     }
-    if(tecla.key == "w" || tecla.key == "a" || tecla.key == "s" || tecla.key == "d" || tecla.key == "e"){
-        moverMonstro()
-        if(mapa[coordPlayer[0]][coordPlayer[1]] == "M" || mapa[coordPlayer[0]][coordPlayer[1]] == "W"){
-            tomarDano()
-        }
-    }
-    if(coordPlayer[0] == coordBloco[0] && coordPlayer[1] == coordBloco[1]){
-        moverBloco(tecla.key)
-        if(mapa[coordBloco[0]][coordBloco[1]] == "M"){
-            mapa[coordBloco[0]][coordBloco[1]] = "v"
-            if(coordBloco[2] == 0){
-                coordBloco = [21,9,1]
-            }else{
-                coordBloco = [30,0,2]
-            }
-        }
-    }
-
-    renderizarMapa(tamY,tamX)
 }
 
 function moverBloco(direcao){
@@ -248,15 +254,18 @@ function renderizarMapa(y,x){
     if(coordPlayer[0] == 1 && coordPlayer[1] == 29){
         window.location.href = "../../final/index.html"
     }
+
+    var textVidas = document.getElementById("textVidas")
+    textVidas.innerHTML = ""
     for(var i = 0; i < vidas; i++){
-        textTela.innerHTML += "     "
+        textVidas.innerHTML += "     "
     }
-    textTela.innerHTML += "<br>"
+    textVidas.innerHTML += "<br>"
     for(var i = 0; i < vidas; i++){
-        textTela.innerHTML += "(`´) "
+        textVidas.innerHTML += "(`´) "
     }
-    textTela.innerHTML += "<br>"
+    textVidas.innerHTML += "<br>"
     for(var i = 0; i < vidas; i++){
-        textTela.innerHTML += " \\/  "
+        textVidas.innerHTML += " \\/  "
     }
 }

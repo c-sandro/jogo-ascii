@@ -9,7 +9,7 @@ var mapa = [["*", "*", "*", "*", "*", "*", "*", "*", "*", "*"],
             ["*", " ", " ", " ", " ", " ", "M", " ", " ", "*"], 
             ["*", "*", "*", "*", "*", "*", "*", "*", "*", "*"],
             [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "]] 
-var coordPlayer = [4,2], coordMonstro = [4,6], coordBloco = [7,5]
+var coordPlayer = [4,2], coordMonstro = [4,6], coordBloco = [7,5], coordBomba = [6,5]
 var xouy = ""
 const textTela = document.getElementById("textTela")
 const tamX = 10, tamY = 10
@@ -60,6 +60,9 @@ window.onkeydown = function andar(tecla){
         tomaDano = !tomaDano
     }else if(tecla.key == "b"){
         coordBloco = [7,5]
+        coordBomba = [6,5]
+    }else if(tecla.key == "x"){
+        explodir()
     }
     //ativar o botao, ou seja, colocar os espinhos
     if(mapa[coordPlayer[0]][coordPlayer[1]] == "O" || mapa[coordMonstro[0]][coordMonstro[1]] == "O" || mapa[coordBloco[0]][coordBloco[1]] == "O"){
@@ -79,6 +82,7 @@ window.onkeydown = function andar(tecla){
             }
         }
     }
+    botaoEspinhos()
     //se o player se mover ou pegar algo, roda
     if(tecla.key == "w" || tecla.key == "a" || tecla.key == "s" || tecla.key == "d" || tecla.key == "e"){
         moverMonstro()
@@ -88,10 +92,50 @@ window.onkeydown = function andar(tecla){
     }
     //se o player estiver em cima do bloco, roda
     if(coordPlayer[0] == coordBloco[0] && coordPlayer[1] == coordBloco[1]){
-        moverBloco(tecla.key)
+        moverObj(tecla.key, coordBloco)
+    }else if(coordPlayer[0] == coordBomba[0] && coordPlayer[1] == coordBomba[1]){
+        moverObj(tecla.key, coordBomba)
     }
-    //ativar o botao de novo
-    if(mapa[coordPlayer[0]][coordPlayer[1]] == "O" || mapa[coordMonstro[0]][coordMonstro[1]] == "O" || mapa[coordBloco[0]][coordBloco[1]] == "O"){
+    //se a bomba ou bloco estiver em espinhos, ele quebra
+    if(mapa[coordBloco[0]][coordBloco[1]] == "M"){
+        mapa[coordBloco[0]][coordBloco[1]] = " "
+        coordBloco = [10,0]
+    }else if(mapa[coordBloco[0]][coordBloco[1]] == "W"){
+        coordBloco = [10,0]
+    }
+    if(mapa[coordBomba[0]][coordBomba[1]] == "M"){
+        mapa[coordBomba[0]][coordBomba[1]] = " "
+        coordBomba = [10,0]
+    }else if(mapa[coordBomba[0]][coordBomba[1]] == "W"){
+        coordBomba = [10,0]
+    }
+    //se o monstro estiver em espinhos, morre
+    if(mapa[coordMonstro[0]][coordMonstro[1]] == "W" || mapa[coordMonstro[0]][coordMonstro[1]] == "M"){
+        coordMonstro = [10, 0]
+        monstroMorto = true
+    }
+
+    renderizarMapa(tamY,tamX)
+}
+
+function explodir(){
+    for(var i = 0; i < 3; i++){
+        for(var j = 0; j < 3; j++){
+            mapa[coordBomba[0] + (i - 1)][coordBomba[1] + (j - 1)] = " "
+            if(coordPlayer[0] == coordBomba[0] + (i - 1) && coordPlayer[1] == coordBomba[1] + (j - 1) && tomaDano == true){
+                vidas--
+            }
+            if(coordMonstro[0] == coordBomba[0] + (i - 1) && coordMonstro[1] == coordBomba[1] + (j - 1) && monstro == true){
+                monstroMorto = true
+                coordMonstro = [10,0]
+            }
+        }
+    }
+    coordBomba = [10,0]
+}
+
+function botaoEspinhos(){
+    if(mapa[coordPlayer[0]][coordPlayer[1]] == "O" || mapa[coordMonstro[0]][coordMonstro[1]] == "O" || mapa[coordBloco[0]][coordBloco[1]] == "O" || mapa[coordBomba[0]][coordBomba[1]] == "O"){
         for(var i = 0; i < tamY; i++){
             for(var j = 0; j < tamX; j++){
                 if(mapa[i][j] == "#"){
@@ -108,20 +152,6 @@ window.onkeydown = function andar(tecla){
             }
         }
     }
-    //se o bloco estiver em espinhos, quebra
-    if(mapa[coordBloco[0]][coordBloco[1]] == "M"){
-        mapa[coordBloco[0]][coordBloco[1]] = " "
-        coordBloco = [10, 0]
-    }else if(mapa[coordBloco[0]][coordBloco[1]] == "W"){
-        coordBloco = [10, 0]
-    }
-    //se o monstro estiver em espinhos, morre
-    if(mapa[coordMonstro[0]][coordMonstro[1]] == "W" || mapa[coordMonstro[0]][coordMonstro[1]] == "M"){
-        coordMonstro = [10, 0]
-        monstroMorto = true
-    }
-
-    renderizarMapa(tamY,tamX)
 }
 
 function moverMonstro(){
@@ -164,37 +194,39 @@ if(monstro == true && monstroMorto == false){
     if(coordMonstro[0] == coordPlayer[0] && coordMonstro[1] == coordPlayer[1]){
         vidas--
     }
+    botaoEspinhos()
 }
 }
 
-function moverBloco(direcao){
-    //se a coordenada que o bloco for nao tiver parede ou porta fechada, ele vai
+function moverObj(direcao, objeto){
+    //se a coordenada que o objeto for nao tiver parede ou porta fechada, ele vai
     //senao, ele empurra o player de volta
     if(direcao == "w"){
-        if(mapa[coordBloco[0] - 1][coordBloco[1]] != "*" && mapa[coordBloco[0] - 1][coordBloco[1]] != "H"){
-            coordBloco[0]--
+        if(mapa[objeto[0] - 1][objeto[1]] != "*" && mapa[objeto[0] - 1][objeto[1]] != "H"){
+            objeto[0]--
         }else{
             coordPlayer[0]++
         }
     }else if(direcao == "a"){
-        if(mapa[coordBloco[0]][coordBloco[1] - 1] != "*" && mapa[coordBloco[0]][coordBloco[1] - 1] != "H"){
-            coordBloco[1]--
+        if(mapa[objeto[0]][objeto[1] - 1] != "*" && mapa[objeto[0]][objeto[1] - 1] != "H"){
+            objeto[1]--
         }else{
             coordPlayer[1]++
         }
     }else if(direcao == "s"){
-        if(mapa[coordBloco[0] + 1][coordBloco[1]] != "*" && mapa[coordBloco[0] + 1][coordBloco[1]] != "H"){
-            coordBloco[0]++
+        if(mapa[objeto[0] + 1][objeto[1]] != "*" && mapa[objeto[0] + 1][objeto[1]] != "H"){
+            objeto[0]++
         }else{
             coordPlayer[0]--
         }
     }else if(direcao == "d"){
-        if(mapa[coordBloco[0]][coordBloco[1] + 1] != "*" && mapa[coordBloco[0]][coordBloco[1] + 1] != "H"){
-            coordBloco[1]++
+        if(mapa[objeto[0]][objeto[1] + 1] != "*" && mapa[objeto[0]][objeto[1] + 1] != "H"){
+            objeto[1]++
         }else{
             coordPlayer[1]--
         }
     }
+    botaoEspinhos()
 }
 
 function renderizarMapa(y,x){
@@ -208,6 +240,8 @@ function renderizarMapa(y,x){
                 textTela.innerText += " §"
             }else if(coordBloco[0] == i && coordBloco[1] == j){
                 textTela.innerText += " □"
+            }else if(coordBomba[0] == i && coordBomba[1] == j){
+                textTela.innerText += " ■"
             }else{
                 if(mapa[i][j] == "W"){
                     textTela.innerText += " M"
