@@ -10,38 +10,38 @@ window.onkeydown = function menu(tecla){
         if(confirmar == false){
            window.location.href = "../tutorial/t1/index.html" 
         }else{
-            document.getElementById("botoes").innerText = `*                                                     * 
-*          /===========\\                              * 
-*          | 1 - jogar |                              * 
-*          \\===========/                              * 
-*                                                     * 
-*          /==============\\                           * 
-*          | 2 - tutorial |                           * 
-*          \\==============/                           * 
-*                                                     * 
-*          /==========\\                               * 
-*          | 3 - sair |                               * 
-*          \\==========/                               * 
-*                                                     * 
-* * * * * * * * * * * * * * * * * * * * * * * * * * * * `
+            document.getElementById("botoes").innerText = `*                                                                 *
+*          /===========\\                                          *
+*          | 1 - jogar |                                          *
+*          \\===========/                                          *
+*                                                                 *
+*          /==============\\                                       *
+*          | 2 - tutorial |                                       *
+*          \\==============/                                       *
+*                                                                 *
+*          /==========\\                                           *
+*          | 3 - sair |                                           *
+*          \\==========/                                           *
+*                                                                 *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * `
             confirmar = false
         }
         
     }else if(tecla.key == "3"){
-        document.getElementById("botoes").innerText = `*                                                     * 
-*          Você tem certeza?                          * 
-*                                                     * 
-*          /=========\\  /=========\\                   * 
-*          | 1 - Sim |  | 2 - Não |                   * 
-*          \\=========/  \\=========/                   * 
-*                                                     * 
-*                                                     * 
-*                                                     * 
-*                                                     * 
-*                                                     * 
-*                                                     * 
-*                                                     * 
-* * * * * * * * * * * * * * * * * * * * * * * * * * * * `
+        document.getElementById("botoes").innerText = `*                                                                 *
+*                          Você tem certeza?                      *
+*                                                                 *
+*                      /=========\\  /=========\\                   *
+*                      | 1 - Sim |  | 2 - Não |                   *
+*                      \\=========/  \\=========/                   *
+*                                                                 *
+*                                                                 *
+*                                                                 *
+*                                                                 *
+*                                                                 *
+*                                                                 *
+*                                                                 *
+ * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * `
         confirmar = true
     }else if(tecla.key == "0"){
         window.location.href = "../fases/faseTeste/index.html"

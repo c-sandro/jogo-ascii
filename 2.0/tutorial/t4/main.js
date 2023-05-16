@@ -35,13 +35,13 @@ window.onkeydown = function andar(tecla){
             coordPlayer[1]++        
         }
     }
-    if(mapa[coordPlayer[0]][coordPlayer[1]] == " M"){
+    if(mapa[coordPlayer[0]][coordPlayer[1]] == "M"){
         coordPlayer = [2,6]
         coordBloco = [2,10,0]
         for(var i = 0; i < tamY; i++){
             for(var j = 0; j < tamX; j++){
                 if(mapa[i][j] == "v"){
-                    mapa[i][j] = " M"
+                    mapa[i][j] = "M"
                 }
             }
         }
@@ -51,7 +51,7 @@ window.onkeydown = function andar(tecla){
     }
     if(coordPlayer[0] == coordBloco[0] && coordPlayer[1] == coordBloco[1]){
         moverBloco(tecla.key)
-        if(mapa[coordBloco[0]][coordBloco[1]] == " M"){
+        if(mapa[coordBloco[0]][coordBloco[1]] == "M"){
             mapa[coordBloco[0]][coordBloco[1]] = "v"
             if(coordBloco[2] == 0){
                 coordBloco = [6, 10, 1]
@@ -69,25 +69,25 @@ window.onkeydown = function andar(tecla){
 
 function moverBloco(direcao){
     if(direcao == "w"){
-        if(mapa[coordBloco[0] - 1][coordBloco[1]] != "*" && mapa[coordBloco[0] - 1][coordBloco[1]] != " H"){
+        if(mapa[coordBloco[0] - 1][coordBloco[1]] != "*" && mapa[coordBloco[0] - 1][coordBloco[1]] != "H"){
             coordBloco[0]--
         }else{
             coordPlayer[0]++
         }
     }else if(direcao == "a"){
-        if(mapa[coordBloco[0]][coordBloco[1] - 1] != "*" && mapa[coordBloco[0]][coordBloco[1] - 1] != " H"){
+        if(mapa[coordBloco[0]][coordBloco[1] - 1] != "*" && mapa[coordBloco[0]][coordBloco[1] - 1] != "H"){
             coordBloco[1]--
         }else{
             coordPlayer[1]++
         }
     }else if(direcao == "s"){
-        if(mapa[coordBloco[0] + 1][coordBloco[1]] != "*" && mapa[coordBloco[0] + 1][coordBloco[1]] != " H"){
+        if(mapa[coordBloco[0] + 1][coordBloco[1]] != "*" && mapa[coordBloco[0] + 1][coordBloco[1]] != "H"){
             coordBloco[0]++
         }else{
             coordPlayer[0]--
         }
     }else if(direcao == "d"){
-        if(mapa[coordBloco[0]][coordBloco[1] + 1] != "*" && mapa[coordBloco[0]][coordBloco[1] + 1] != " H"){
+        if(mapa[coordBloco[0]][coordBloco[1] + 1] != "*" && mapa[coordBloco[0]][coordBloco[1] + 1] != "H"){
             coordBloco[1]++
         }else{
             coordPlayer[1]--
