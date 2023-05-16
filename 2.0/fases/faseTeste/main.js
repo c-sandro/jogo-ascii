@@ -1,12 +1,12 @@
 var mapa = [["*", "*", "*", "*", "*", "*", "*", "*", "*", "*"], 
-            ["*", " ", " ", " ", " ", " ", " ", " ", " ", "*"], 
-            ["*", " ", " ", " ", " ", " ", " ", " ", " ", "*"], 
-            ["*", " ", " ", " ", " ", " ", " ", " ", " ", "*"], 
+            ["*", " ", " ", " ", " ", "▼", " ", " ", " ", "*"], 
+            ["*", " ", " ", " ", " ", " ", " ", " ", "◄", "*"], 
+            ["*", "►", " ", " ", " ", " ", " ", " ", " ", "*"], 
             ["*", " ", " ", " ", " ", " ", " ", "*", " ", "*"], 
             ["*", " ", "k", " ", " ", " ", " ", "H", " ", "*"], 
             ["*", " ", "O", " ", " ", " ", " ", "#", " ", "*"], 
             ["*", " ", " ", " ", " ", " ", " ", " ", " ", "*"], 
-            ["*", " ", " ", " ", " ", " ", "M", " ", " ", "*"], 
+            ["*", " ", " ", " ", "▲", " ", "M", " ", " ", "*"], 
             ["*", "*", "*", "*", "*", "*", "*", "*", "*", "*"],
             [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "]] 
 var coordPlayer = [4,2], coordMonstro = [4,6], coordBloco = [7,5], coordBomba = [6,5]
@@ -87,8 +87,9 @@ window.onkeydown = function andar(tecla){
     if(tecla.key == "w" || tecla.key == "a" || tecla.key == "s" || tecla.key == "d" || tecla.key == "e"){
         moverMonstro()
         if((mapa[coordPlayer[0]][coordPlayer[1]] == "M" || mapa[coordPlayer[0]][coordPlayer[1]] == "W") && tomaDano == true){
-            vidas-- 
+            vidas--
         }
+        teleporte(coordPlayer)
     }
     //se o player estiver em cima do bloco, roda
     if(coordPlayer[0] == coordBloco[0] && coordPlayer[1] == coordBloco[1]){
@@ -100,13 +101,8 @@ window.onkeydown = function andar(tecla){
     if(mapa[coordBloco[0]][coordBloco[1]] == "M"){
         mapa[coordBloco[0]][coordBloco[1]] = " "
         coordBloco = [10,0]
-    }else if(mapa[coordBloco[0]][coordBloco[1]] == "W"){
-        coordBloco = [10,0]
-    }
-    if(mapa[coordBomba[0]][coordBomba[1]] == "M"){
+    }else if(mapa[coordBomba[0]][coordBomba[1]] == "M"){
         mapa[coordBomba[0]][coordBomba[1]] = " "
-        coordBomba = [10,0]
-    }else if(mapa[coordBomba[0]][coordBomba[1]] == "W"){
         coordBomba = [10,0]
     }
     //se o monstro estiver em espinhos, morre
@@ -134,6 +130,38 @@ function explodir(){
     coordBomba = [10,0]
 }
 
+function teleporte(objeto){
+    if(mapa[objeto[0]][objeto[1]] == "▲"){
+        for(var i = 0; i < tamY; i++){
+            if(mapa[i].includes("▼") == true){
+                objeto[0] = i
+                objeto[1] = mapa[i].indexOf("▼")
+            }
+        }
+    }else if(mapa[objeto[0]][objeto[1]] == "▼"){
+        for(var i = 0; i < tamY; i++){
+            if(mapa[i].includes("▲") == true){
+                objeto[0] = i
+                objeto[1] = mapa[i].indexOf("▲")
+            }
+        }
+    }else if(mapa[objeto[0]][objeto[1]] == "►"){
+        for(var i = 0; i < tamY; i++){
+            if(mapa[i].includes("◄") == true){
+                objeto[0] = i
+                objeto[1] = mapa[i].indexOf("◄")
+            }
+        }
+    }else if(mapa[objeto[0]][objeto[1]] == "◄"){
+        for(var i = 0; i < tamY; i++){
+            if(mapa[i].includes("►") == true){
+                objeto[0] = i
+                objeto[1] = mapa[i].indexOf("►")
+            }
+        }
+    }
+}
+
 function botaoEspinhos(){
     if(mapa[coordPlayer[0]][coordPlayer[1]] == "O" || mapa[coordMonstro[0]][coordMonstro[1]] == "O" || mapa[coordBloco[0]][coordBloco[1]] == "O" || mapa[coordBomba[0]][coordBomba[1]] == "O"){
         for(var i = 0; i < tamY; i++){
@@ -151,6 +179,11 @@ function botaoEspinhos(){
                 }
             }
         }
+    }
+    if(mapa[coordBloco[0]][coordBloco[1]] == "W"){
+        coordBloco = [10,0]
+    }else if(mapa[coordBomba[0]][coordBomba[1]] == "W"){
+        coordBomba = [10,0]
     }
 }
 
@@ -195,6 +228,7 @@ if(monstro == true && monstroMorto == false){
         vidas--
     }
     botaoEspinhos()
+    teleporte(coordMonstro)
 }
 }
 
@@ -227,6 +261,7 @@ function moverObj(direcao, objeto){
         }
     }
     botaoEspinhos()
+    teleporte(objeto)
 }
 
 function renderizarMapa(y,x){
