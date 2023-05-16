@@ -51,7 +51,7 @@ window.onkeydown = function andar(tecla){
     }
     if(coordPlayer[0] == coordBloco[0] && coordPlayer[1] == coordBloco[1]){
         moverBloco(tecla.key)
-        if(mapa[coordBloco[0]][coordBloco[1]] == " M"){
+        if(mapa[coordBloco[0]][coordBloco[1]] == "M"){
             mapa[coordBloco[0]][coordBloco[1]] = "v"
             if(coordBloco[2] == 0){
                 coordBloco = [6, 10, 1]
