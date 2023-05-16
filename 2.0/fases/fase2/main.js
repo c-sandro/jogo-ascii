@@ -209,7 +209,7 @@ function tomarDano(){
         }
     }
     if(vidas <= 0){
-        window.location.href = "../../menu/index.html"
+        window.location.href = "../../game-over/index.html"
     }
 }
 
