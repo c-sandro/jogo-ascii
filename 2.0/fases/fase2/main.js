@@ -70,7 +70,7 @@ window.onkeydown = function andar(tecla){
         }
     }
     if(coordPlayer[0] == 2 && coordPlayer[1] == 29){
-        window.location.href = "../../menu/index.html"
+      window.location.href = "../../you-win/index.html"
     }
     botaoEspinhos()
     if(tecla.key == "w" || tecla.key == "a" || tecla.key == "s" || tecla.key == "d" || tecla.key == "e"){
