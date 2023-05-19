@@ -12,7 +12,6 @@ var xouy = ""
 var textTela = document.getElementById("textTela")  
 var tamY = 9, tamX = 15
 var monstroMorto = false
-var fim = false
 renderizarMapa(tamY, tamX)
 // função do player andar 
 window.onkeydown = function andar(tecla){
@@ -35,10 +34,6 @@ window.onkeydown = function andar(tecla){
         if(mapa[coordPlayer[0]][coordPlayer[1] + 1] != "*" && mapa[coordPlayer[0]][coordPlayer[1] + 1] != "H"){
             coordPlayer[1]++   
             xouy = "x"     
-        }
-    }else if (tecla.key == "3"){
-        if(fim == true){
-            window.location.href = "../../menu/index.html"            
         }
     }
     //função do botão O, acionamento dos espinhos 
@@ -63,7 +58,9 @@ window.onkeydown = function andar(tecla){
     if(tecla.key == "w" || tecla.key == "a" || tecla.key == "s" || tecla.key == "d" || tecla.key == "e"){
         moverMonstro()
     }
-
+    if(coordPlayer[0] == 4 && coordPlayer[1] == 14) {
+        window.location.href = "../t6/index.html"
+    }
     renderizarMapa(tamY, tamX)
 }
 function moverMonstro(){
@@ -114,11 +111,6 @@ function moverMonstro(){
             monstroMorto = true
             mapa[4][14] = "U"
         }
-    }
-    if(coordPlayer[0] == 4 && coordPlayer[1] == 14) {
-        document.getElementById("instrucao").innerHTML = "Você completou o Tutorial, parabéns!. <br>"
-        document.getElementById("instrucao").innerText += "Aperte 3 para voltar ao menu"
-        fim = true
     }
 }        
 

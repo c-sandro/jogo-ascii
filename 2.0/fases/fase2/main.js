@@ -30,7 +30,7 @@ var mapa = [["*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*
             ["*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*"],
             ["*", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", "*"]]  
 var coordPlayer = [1,28], coordBloco = [9,25,0], coordMonstro = [28,2]
-const textTela = document.getElementById("textTela")
+const textTela = document.getElementById("textTela"), textVidas = document.getElementById("textVidas")
 const tamX = 30, tamY = 30
 var vidas = 3, qntChaves = 0
 var monstroMorto = false
@@ -70,7 +70,7 @@ window.onkeydown = function andar(tecla){
         }
     }
     if(coordPlayer[0] == 27 && coordPlayer[1] == 29){
-      window.location.href = "../../you-win/index.html"
+      window.location.href = "../fase3/index.html"
     }
     botaoEspinhos()
     if(tecla.key == "w" || tecla.key == "a" || tecla.key == "s" || tecla.key == "d" || tecla.key == "e"){
@@ -255,17 +255,16 @@ function renderizarMapa(y,x){
         window.location.href = "../../final/index.html"
     }
 
-    var textVidas = document.getElementById("textVidas")
     textVidas.innerHTML = ""
-    for(var i = 0; i < vidas; i++){
-        textVidas.innerHTML += "     "
-    }
     textVidas.innerHTML += "<br>"
-    for(var i = 0; i < vidas; i++){
-        textVidas.innerHTML += "(`´) "
-    }
-    textVidas.innerHTML += "<br>"
-    for(var i = 0; i < vidas; i++){
-        textVidas.innerHTML += " \\/  "
+    for(var i = 0; i < 3; i++){
+        if(i < vidas){
+            textVidas.innerHTML += "(`´) "
+            textVidas.innerHTML += "<br>"
+            textVidas.innerHTML += " \\/  "
+        }else{
+            textVidas.innerHTML += "<br>"
+        }
+        textVidas.innerHTML += "<br>"
     }
 }

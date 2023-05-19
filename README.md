@@ -14,7 +14,8 @@ Minescape ilustra a história de um minerador, cujo nome é Aglailson, que após
 "S" - mover para baixo <br>
 "A" - mover para a esquerda <br>
 "D" - mover para a direita <br>
-"E" - interagir com os objetos <br><br>
+"E" - interagir com os objetos <br>
+"X" - ativar a bomba (caso a fase possua) <br>
 
 *!!!!ELEMENTOS DAS FASES!!!!*
 
@@ -28,8 +29,8 @@ Minescape ilustra a história de um minerador, cujo nome é Aglailson, que após
 "#" - armadilha que quando acionada se transforma em espinho <br>
 "§" - serpente que corre atrás do personagem <br>
 "◄/►" - teletransporte que será usado para ir de um lado para o outro do mapa <br>
-"■" - cuidado com a bomba, saia de perto e aperte x para explodir. <br>
-"□"  - essa é a caixa, use para conseguir passar pelos espinhos ou utilizar os botões sem estar em cima. <br><br>
+"■" - bomba que pode ser empurrada e explode objetos do mapa. <br>
+"□"  - caixa que quebra quando espurrada nos espinhos, mas permite andar sobre eles <br><br>
 
 
 Esse é um jogo 2d feito por **Carlos Sandro, Giovanni Gomes, Diogo Siqueira** e **Carolline Mello** como um projeto da universidade
