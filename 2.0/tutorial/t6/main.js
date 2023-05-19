@@ -124,7 +124,6 @@ function renderizarMapa(y,x){
             }else{
                 textTela.innerHTML += " " + mapa[i][j]   
             }
-            
         } 
         textTela.innerHTML += "<br>"
     }
