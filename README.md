@@ -8,22 +8,22 @@ Minescape ilustra a história de um minerador, cujo nome é Aglailson, que após
 *TUTORIAL*: 
 
 !!!!CONTROLE DO JOGADOR!!!!
-W - mover para cima 
-S - mover para baixo 
-A - mover para a esquerda
-D - mover para a direita
-E - interagir com os objetos
+"W" - mover para cima 
+"S" - mover para baixo 
+"A" - mover para a esquerda
+"D" - mover para a direita
+"E" - interagir com os objetos
 
 !!!!ELEMENTOS DAS FASES!!!!
-& - personagem, você
-* - parede do jogo
-U - porta aberta 
-H - porta fechada 
-k - chave para abrir a porta
-M - espinhos(se você tocar, perde uma vida e  volta para o início) 
-O - botão para acionar a armadilha
-# - armadilha que quando acionada se transforma em espinho
-§ - serpente que corre atrás do personagem
-◄/► - teletransporte que será usado para ir de um lado para o outro do mapa
-■ - cuidado com a bomba, saia de perto e aperte x para explodir.
-□  - essa é a caixa, use para conseguir passar pelos espinhos ou utilizar os botões sem estar em cima.
+"&" - personagem, você
+"*" - parede do jogo
+"U" - porta aberta 
+"H" - porta fechada 
+"k" - chave para abrir a porta
+"M" - espinhos(se você tocar, perde uma vida e  volta para o início) 
+"O" - botão para acionar a armadilha
+"#" - armadilha que quando acionada se transforma em espinho
+"§" - serpente que corre atrás do personagem
+"◄/►" - teletransporte que será usado para ir de um lado para o outro do mapa
+"■" - cuidado com a bomba, saia de perto e aperte x para explodir.
+"□"  - essa é a caixa, use para conseguir passar pelos espinhos ou utilizar os botões sem estar em cima.
