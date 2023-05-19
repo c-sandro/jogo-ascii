@@ -256,7 +256,6 @@ function renderizarMapa(y,x){
     }
 
     textVidas.innerHTML = ""
-    textVidas.innerHTML += "<br>"
     for(var i = 0; i < 3; i++){
         if(i < vidas){
             textVidas.innerHTML += "(`´) "
