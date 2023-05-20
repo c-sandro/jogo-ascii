@@ -245,7 +245,7 @@ function tomarDano(){
 function renderizarMapa(y,x){
     textTela.innerText = ""
     for(var i = 0; i < y; i++){
-        //if(Math.abs(i - coordPlayer[0]) <= 11){
+        if(Math.abs(i - coordPlayer[0]) <= 11){
             for(var j = 0; j < x; j++){
                 if(coordPlayer[0] == i && coordPlayer[1] == j){
                     textTela.innerHTML += "<span style='color: blue'> &</span>"
@@ -277,7 +277,7 @@ function renderizarMapa(y,x){
                     textTela.innerHTML += "  "
                 }*/
             }
-        //}
+        }
         textTela.innerHTML += "<br>"
     }
     if(coordPlayer[0] == 28 && coordPlayer[1] == 29){
