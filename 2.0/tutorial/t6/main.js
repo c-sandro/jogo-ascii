@@ -127,5 +127,8 @@ function renderizarMapa(y,x){
         } 
         textTela.innerHTML += "<br>"
     }
+    if (coordBomba[2] <= 0) {
+        coordBomba[2] = 0; // garante que a contagem não fique negativa após as 3 tentativas 
+      }
     document.getElementById("usos").innerText = `A bomba possui ${coordBomba[2]} usos`
 }
