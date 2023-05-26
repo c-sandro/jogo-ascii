@@ -9,7 +9,6 @@ var mapa = [[" ", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", "*", " ", " 
 var coordPlayer = [5,6], coordBomba = [5,8,3]
 var textTela = document.getElementById("textTela")  
 var tamY = 8, tamX = 13
-var fim = false
 renderizarMapa(tamY, tamX)
 // função do player andar 
 window.onkeydown = function andar(tecla){
@@ -41,8 +40,7 @@ window.onkeydown = function andar(tecla){
             moverBomba(tecla.key)
         }
         if(coordPlayer[0] == 7 && coordPlayer[1] == 1) {
-            document.getElementById("instrucao").innerHTML = "Você completou o tutorial! <br> Aperte 3 para retornar ao menu"
-            fim = true
+            window.location.href = "../t7/index.html"
         }
     }
 
@@ -113,14 +111,8 @@ function renderizarMapa(y,x){
                 textTela.innerHTML += "<span style='color: #990000'> ■</span>"
             }else if(mapa[i][j] == "H"){
                 textTela.innerHTML += "<span style='color: #946506'> H</span>"
-            }else if (mapa[i][j] == "U"){
+            }else if(mapa[i][j] == "U"){
                 textTela.innerHTML += "<span style='color: #946506'> U</span>"
-            }else if (mapa[i][j] == "#"){
-                textTela.innerHTML += "<span style='color: #5e5e5c'> #</span>"
-            }else if (mapa[i][j] == "M"){
-                textTela.innerHTML += "<span style='color: #5e5e5c'> M</span>"
-            }else if (mapa[i][j] == "O"){
-                textTela.innerHTML += "<span style='color: #00ba10'> O</span>"
             }else{
                 textTela.innerHTML += " " + mapa[i][j]   
             }
