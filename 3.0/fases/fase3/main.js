@@ -442,7 +442,7 @@ function renderizarMapa(y,x){
                     }
                 }else{
                     if(j < coordPlayer[1]){
-                        for(j; j < coordPlayer[1] - 11; j++){
+                        for(j; j < coordPlayer[1] - 12; j++){
                             textTela.innerHTML += "  "
                         }
                         textTela.innerHTML += "  "
@@ -455,7 +455,7 @@ function renderizarMapa(y,x){
             }
         textTela.innerHTML += " <br>" 
         }else{
-            if(i < coordPlayer[0] - 11){
+            if(i < coordPlayer[0] - 12){
                 for(i; i < coordPlayer[0] - 11; i++){
                     textTela.innerHTML += " <br>"
                 }
