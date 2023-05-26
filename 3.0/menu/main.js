@@ -29,11 +29,11 @@ window.onkeydown = function menu(tecla){
         
     }else if(tecla.key == "3"){
         document.getElementById("botoes").innerText = `*                                                                 *
-*                          Você tem certeza?                      *
+*                        Você tem certeza?                        *
 *                                                                 *
-*                      /=========\\  /=========\\                   *
-*                      | 1 - Sim |  | 2 - Não |                   *
-*                      \\=========/  \\=========/                   *
+*                    /=========\\  /=========\\                     *
+*                    | 1 - Sim |  | 2 - Não |                     *
+*                    \\=========/  \\=========/                     *
 *                                                                 *
 *                                                                 *
 *                                                                 *
